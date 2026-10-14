@@ -1,0 +1,10 @@
+# OS / editor noise — the app itself needs no dependencies
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+*.swp
+*~
+node_modules/
+dist/

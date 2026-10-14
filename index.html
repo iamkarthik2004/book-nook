@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book Nook — Your personal reading list. Track books you want to read, are reading, and have finished." />
+  <title>Book Nook — Your personal reading list</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Elegant serif + clean sans-serif with system fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" href="icon.png" type="image/png" />
+</head>
+<body>
+  <a class="skip-link" href="#library-heading">Skip to library</a>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">
+          <img
+            src="icon.png"
+            alt="Book Nook logo — stacked books with a plant and a cup of coffee"
+            width="58"
+            height="58"
+          />
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-name">Book Nook</h1>
+          <p class="tagline">Your personal reading list</p>
+        </div>
+      </div>
+      <blockquote class="header-quote">
+        <p>&ldquo;A reader lives a thousand lives before he dies.&rdquo;</p>
+        <cite>&mdash; George R.R. Martin</cite>
+      </blockquote>
+    </div>
+    <!-- decorative shelf line -->
+    <div class="header-shelf" aria-hidden="true"><span></span></div>
+  </header>
+
+  <main class="container">
+    <!-- ===== Reading statistics ===== -->
+    <section class="stats" aria-label="Reading statistics">
+      <article class="stat-card stat-total">
+        <div class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+        </div>
+        <div class="stat-body">
+          <span class="stat-number" id="stat-total">0</span>
+          <span class="stat-label">Total Books</span>
+        </div>
+      </article>
+      <article class="stat-card stat-toread">
+        <div class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <div class="stat-body">
+          <span class="stat-number" id="stat-toread">0</span>
+          <span class="stat-label">To Read</span>
+        </div>
+      </article>
+      <article class="stat-card stat-reading">
+        <div class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2V4z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7V4z"/></svg>
+        </div>
+        <div class="stat-body">
+          <span class="stat-number" id="stat-reading">0</span>
+          <span class="stat-label">Reading</span>
+        </div>
+      </article>
+      <article class="stat-card stat-finished">
+        <div class="stat-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <div class="stat-body">
+          <span class="stat-number" id="stat-finished">0</span>
+          <span class="stat-label">Finished</span>
+        </div>
+      </article>
+    </section>
+
+    <div class="layout">
+      <!-- ===== Add a book ===== -->
+      <aside class="panel form-panel">
+        <div class="panel-heading">
+          <span class="plant" aria-hidden="true">🪴</span>
+          <h2>Add a New Book</h2>
+          <p class="panel-sub">Grow your shelf, one story at a time.</p>
+        </div>
+        <form id="add-book-form" novalidate>
+          <div class="field">
+            <label for="title-input">Book title</label>
+            <input
+              type="text"
+              id="title-input"
+              name="title"
+              placeholder="e.g. The Midnight Library"
+              maxlength="200"
+              autocomplete="off"
+              aria-describedby="title-error"
+            />
+            <p class="error" id="title-error" role="alert" hidden></p>
+          </div>
+          <div class="field">
+            <label for="author-input">Author</label>
+            <input
+              type="text"
+              id="author-input"
+              name="author"
+              placeholder="e.g. Matt Haig"
+              maxlength="200"
+              autocomplete="off"
+              aria-describedby="author-error"
+            />
+            <p class="error" id="author-error" role="alert" hidden></p>
+          </div>
+          <div class="field">
+            <label for="status-input">Reading status</label>
+            <select id="status-input" name="status">
+              <option value="to-read" selected>To read</option>
+              <option value="reading">Reading</option>
+              <option value="finished">Finished</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span aria-hidden="true">＋</span> Add Book
+          </button>
+        </form>
+        <div class="cozy-illustration" aria-hidden="true">
+          <div class="stack">
+            <span class="book b1"></span>
+            <span class="book b2"></span>
+            <span class="book b3"></span>
+          </div>
+          <p class="cozy-caption">“Once you learn to read, you will be forever free.”</p>
+        </div>
+      </aside>
+
+      <!-- ===== Library ===== -->
+      <section class="panel library-panel" aria-labelledby="library-heading">
+        <div class="panel-heading library-heading-row">
+          <div>
+            <h2 id="library-heading">Your Library</h2>
+            <p class="panel-sub" id="library-count">0 books on your shelf</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <label class="visually-hidden" for="search-input">Search books by title or author</label>
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Search by title or author…"
+              autocomplete="off"
+            />
+          </div>
+          <div class="filters" role="group" aria-label="Filter books by status">
+            <button type="button" class="chip active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="chip" data-filter="to-read" aria-pressed="false">To read</button>
+            <button type="button" class="chip" data-filter="reading" aria-pressed="false">Reading</button>
+            <button type="button" class="chip" data-filter="finished" aria-pressed="false">Finished</button>
+          </div>
+        </div>
+
+        <div id="book-list" class="book-list" aria-live="polite"></div>
+
+        <!-- Empty state: no books at all -->
+        <div id="empty-state" class="state-card" hidden>
+          <div class="state-art" aria-hidden="true">
+            <svg viewBox="0 0 120 90" width="120" height="90">
+              <rect x="18" y="58" width="84" height="8" rx="3" fill="#E8DCC8"/>
+              <rect x="28" y="44" width="52" height="14" rx="3" fill="#B5C9B0"/>
+              <rect x="34" y="30" width="44" height="14" rx="3" fill="#D97D4E"/>
+              <rect x="30" y="16" width="48" height="14" rx="3" fill="#2D5A3D"/>
+              <circle cx="92" cy="34" r="9" fill="#F9DEC9" stroke="#D97D4E" stroke-width="2"/>
+              <path d="M88 34h8M92 30v8" stroke="#D97D4E" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Your shelf is empty</h3>
+          <p>Add your first book using the form and start your reading journey.</p>
+        </div>
+
+        <!-- No-results state: search/filter matched nothing -->
+        <div id="no-results" class="state-card" hidden>
+          <div class="state-art" aria-hidden="true">🔍</div>
+          <h3>No books found</h3>
+          <p>Try a different search term or status filter.</p>
+          <button type="button" class="btn btn-ghost" id="clear-search">Clear search &amp; filters</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Book Nook</strong> · Your personal reading list · Data is stored privately in your browser.</p>
+    </div>
+  </footer>
+
+  <!-- Delete confirmation dialog -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+      <h3 id="modal-title">Remove this book?</h3>
+      <p id="modal-desc">This will permanently remove <strong id="modal-book-name"></strong> from your library.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modal-cancel">Keep it</button>
+        <button type="button" class="btn btn-danger" id="modal-confirm">Yes, remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
