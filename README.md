@@ -1,5 +1,10 @@
 # 📚 Book Nook — Your personal reading list
 
+**🌐 Live demo:** <https://iamkarthik2004.github.io/book-tracker/>
+
+> If the link above shows a 404, GitHub Pages hasn't been enabled yet — see
+> [Deploy to GitHub Pages](#-deploy-to-github-pages) below (takes ~1–2 minutes after enabling).
+
 A complete, polished, responsive **Book Tracker** web app built with plain **HTML5, CSS3, and vanilla JavaScript**. No frameworks, no backend, no dependencies — just open `index.html` and start tracking your reading.
 
 ## ✨ Features
